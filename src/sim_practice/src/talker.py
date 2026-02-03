@@ -1,8 +1,8 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 
 import rclpy
 from rclpy.node import Node
-from std_msgs import String
+from std_msgs.msg import String
 
 
 class Talker(Node):
@@ -14,10 +14,11 @@ class Talker(Node):
 
     def publish_message(self):
         msg = String()
-        msg.data = f'Hello Ros2! {self.count}'
-        self.publish.publish(msg)
+        msg.data = f"Hello ROS 2! {self.count}"
+        self.publisher.publish(msg)          # <-- was self.publish.publish (bug)
         self.get_logger().info(msg.data)
         self.count += 1
+
 
 def main():
     rclpy.init()
@@ -25,6 +26,7 @@ def main():
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == "__main__":
     main()
