@@ -33,9 +33,12 @@ install(DIRECTORY urdf
   DESTINATION share/${PROJECT_NAME}
 )
 
-install(DIRECTORY urdf launch 
+install(DIRECTORY launch 
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(FILES urdf_sim_config.rviz
+  DESTINATION share/${PROJECT_NAME}
+)
 
 ament_package()

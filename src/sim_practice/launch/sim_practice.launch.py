@@ -6,6 +6,8 @@ import os
 def generate_launch_description():
     pkg_share = get_package_share_directory("sim_practice")
     urdf_path = os.path.join(pkg_share, 'urdf','sim_practice.urdf.xml')
+    rviz_config_path = os.path.join(pkg_share, "urdf_sim_config.rviz")
+
 
     with open(urdf_path, 'r') as f:
         robot_description = f.read()
@@ -25,6 +27,7 @@ def generate_launch_description():
         Node(
             package='rviz2',
             executable='rviz2',
+            arguments=['-d',rviz_config_path],
             output='screen'
         ),
     ])
