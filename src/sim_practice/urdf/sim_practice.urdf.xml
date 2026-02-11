@@ -2,6 +2,17 @@
 <!--<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="practice_rover">-->
 <robot name="practice_rover">
 
+<!--==========-->
+<!--WORLD_LINK-->
+<!--==========-->
+<link name="world"/>
+
+<joint name="world_to_base" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 .2" rpy="0 0 0"/>
+</joint>
+
 
 <!--=========-->
 <!--BASE_LINK_ROOT-->
@@ -12,6 +23,7 @@
         <mass value="5.0"/>
         <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
     </inertial>
+
     <visual>
         <geometry>
             <box size="0.5 0.4 0.2"/>
@@ -20,6 +32,13 @@
             <color rgba="0 0 1 1"/>
         </material>
     </visual>
+
+    <!-- Collision for physics -->
+    <collision>
+        <geometry>
+            <box size="0.5 0.4 0.2"/>
+        </geometry>
+    </collision>
 </link>
 
 <!--==========-->
@@ -32,6 +51,7 @@
         <mass value="0.5"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
+
     <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry>
@@ -41,6 +61,13 @@
             <color rgba="0 0 0 1"/>
         </material>
     </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="0.1" length="0.15"/>
+        </geometry>
+    </collision>
 </link>
 
 <joint name="wheel_fl_joint" type="continuous">
@@ -48,6 +75,8 @@
     <child link="wheel_fl_link"/>
     <origin xyz="0.35 0.3 -0.1" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
+    <!-- Damping helps stability in Gazebo -->
+    <dynamics damping="0.5" friction="0.1"/>
 </joint>
 
 <!--front_right-->
@@ -56,6 +85,7 @@
         <mass value="0.5"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
+
     <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry>
@@ -65,6 +95,13 @@
             <color rgba="0 0 0 1"/>
         </material>
     </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="0.1" length="0.15"/>
+        </geometry>
+    </collision>
 </link>
 
 <joint name="wheel_fr_joint" type="continuous">
@@ -72,6 +109,7 @@
     <child link="wheel_fr_link"/>
     <origin xyz="0.35 -0.3 -0.1" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.5" friction="0.1"/>
 </joint>
 
 <!--mid_left-->
@@ -80,6 +118,7 @@
         <mass value="0.5"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
+
     <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry>
@@ -89,6 +128,13 @@
             <color rgba="0 0 0 1"/>
         </material>
     </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="0.1" length="0.15"/>
+        </geometry>
+    </collision>
 </link>
 
 <joint name="wheel_ml_joint" type="continuous">
@@ -96,6 +142,7 @@
     <child link="wheel_ml_link"/>
     <origin xyz="0.05 0.3 -0.1" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.5" friction="0.1"/>
 </joint>
 
 <!--mid_right-->
@@ -104,6 +151,7 @@
         <mass value="0.5"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
+
     <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry>
@@ -113,6 +161,13 @@
             <color rgba="0 0 0 1"/>
         </material>
     </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="0.1" length="0.15"/>
+        </geometry>
+    </collision>
 </link>
 
 <joint name="wheel_mr_joint" type="continuous">
@@ -120,6 +175,7 @@
     <child link="wheel_mr_link"/>
     <origin xyz="0.05 -0.3 -0.1" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.5" friction="0.1"/>
 </joint>
 
 <!--back_left-->
@@ -128,6 +184,7 @@
         <mass value="0.5"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
+
     <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry>
@@ -137,6 +194,13 @@
             <color rgba="0 0 0 1"/>
         </material>
     </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="0.1" length="0.15"/>
+        </geometry>
+    </collision>
 </link>
 
 <joint name="wheel_bl_joint" type="continuous">
@@ -144,6 +208,7 @@
     <child link="wheel_bl_link"/>
     <origin xyz="-.25 0.3 -0.1" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.5" friction="0.1"/>
 </joint>
 
 <!--back_right-->
@@ -152,6 +217,7 @@
         <mass value="0.5"/>
         <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
     </inertial>
+
     <visual>
         <origin xyz="0 0 0" rpy="1.5708 0 0"/>
         <geometry>
@@ -161,6 +227,13 @@
             <color rgba="0 0 0 1"/>
         </material>
     </visual>
+
+    <collision>
+        <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+        <geometry>
+            <cylinder radius="0.1" length="0.15"/>
+        </geometry>
+    </collision>
 </link>
 
 <joint name="wheel_br_joint" type="continuous">
@@ -168,6 +241,63 @@
     <child link="wheel_br_link"/>
     <origin xyz="-.25 -0.3 -0.1" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
+    <dynamics damping="0.5" friction="0.1"/>
 </joint>
+
+
+<!--===============================-->
+<!-- GAZEBO CLASSIC SURFACE PARAMS -->
+<!--===============================-->
+
+<!-- Base friction can be moderate -->
+<gazebo reference="base_link">
+  <mu1>0.6</mu1>
+  <mu2>0.6</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
+
+<!-- Wheels: higher friction + stable contact -->
+<gazebo reference="wheel_fl_link">
+  <mu1>1.2</mu1>
+  <mu2>1.2</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="wheel_fr_link">
+  <mu1>1.2</mu1>
+  <mu2>1.2</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="wheel_ml_link">
+  <mu1>1.2</mu1>
+  <mu2>1.2</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="wheel_mr_link">
+  <mu1>1.2</mu1>
+  <mu2>1.2</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="wheel_bl_link">
+  <mu1>1.2</mu1>
+  <mu2>1.2</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
+
+<gazebo reference="wheel_br_link">
+  <mu1>1.2</mu1>
+  <mu2>1.2</mu2>
+  <kp>1000000.0</kp>
+  <kd>100.0</kd>
+</gazebo>
 
 </robot>
